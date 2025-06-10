@@ -33,6 +33,7 @@ Customer table:
 | 5  | Zack | 1          |
 | 6  | Mark | 2          |
 +----+------+------------+
+
 Output: 
 +------+
 | name |
