@@ -1,45 +1,52 @@
-Table: Weather
+ Weather Temperature Comparison
 
-+---------------+---------+
-| Column Name   | Type    |
-+---------------+---------+
-| id            | int     |
-| recordDate    | date    |
-| temperature   | int     |
-+---------------+---------+
-id is the column with unique values for this table.
-There are no different rows with the same recordDate.
-This table contains information about the temperature on a certain day.
---------- 
+ Problem Statement
 
-Write a solution to find all dates' id with higher temperatures compared to its previous dates (yesterday).
+You are given a table `Weather` with the following schema:
 
-Return the result table in any order.
+| Column Name  | Type   |
+|--------------|--------|
+| id           | int    |
+| recordDate   | date   |
+| temperature  | int    |
 
-The result format is in the following example.
+- `id` is unique for each row.
+- No two rows have the same `recordDate`.
+- The table stores temperature information for each day.
 
---------
+---
 
-Example 1:
+ Task
 
-Input: 
-Weather table:
-+----+------------+-------------+
-| id | recordDate | temperature |
-+----+------------+-------------+
-| 1  | 2015-01-01 | 10          |
-| 2  | 2015-01-02 | 25          |
-| 3  | 2015-01-03 | 20          |
-| 4  | 2015-01-04 | 30          |
-+----+------------+-------------+
-Output: 
-+----+
+Write a query to find all dates' `id` where the temperature is higher than the previous date's (yesterday's) temperature.
+
+Return the result in any order.
+
+---
+
+ Example
+
+ Input Table: Weather
+
+| id | recordDate  | temperature |
+|----|-------------|-------------|
+| 1  | 2015-01-01  | 10          |
+| 2  | 2015-01-02  | 25          |
+| 3  | 2015-01-03  | 20          |
+| 4  | 2015-01-04  | 30          |
+
+ Output:
+
 | id |
-+----+
+|----|
 | 2  |
 | 4  |
-+----+
----------
-Explanation: 
-In 2015-01-02, the temperature was higher than the previous day (10 -> 25).
-In 2015-01-04, the temperature was higher than the previous day (20 -> 30).
+
+ Explanation:
+
+- On `2015-01-02`, the temperature (25) was higher than the previous day (10).
+- On `2015-01-04`, the temperature (30) was higher than the previous day (20).
+
+---
+
+This problem helps in understanding how to compare rows based on date values and how to use SQL joins or window functions effectively.
