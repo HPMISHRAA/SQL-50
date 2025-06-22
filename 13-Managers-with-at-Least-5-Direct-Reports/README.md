@@ -1,44 +1,56 @@
-Table: Employee
+# 🧑‍💼 SQL Challenge: Managers with At Least 5 Direct Reports
 
-+-------------+---------+
-| Column Name | Type    |
-+-------------+---------+
-| id          | int     |
-| name        | varchar |
-| department  | varchar |
-| managerId   | int     |
-+-------------+---------+
-id is the primary key (column with unique values) for this table.
-Each row of this table indicates the name of an employee, their department, and the id of their manager.
-If managerId is null, then the employee does not have a manager.
-No employee will be the manager of themself.
- 
+## 📄 Problem Statement
 
-Write a solution to find managers with at least five direct reports.
+Write a SQL query to **find the names of managers who have at least five direct reports**.
 
-Return the result table in any order.
+Each employee may or may not have a manager. If `managerId` is `null`, the employee has no manager.
 
-The result format is in the following example.
+---
 
- 
+## 🧮 Table: Employee
 
-Example 1:
+| Column Name | Type    | Description                              |
+|-------------|---------|------------------------------------------|
+| id          | int     | Primary key - Employee ID                |
+| name        | varchar | Name of the employee                     |
+| department  | varchar | Department to which the employee belongs |
+| managerId   | int     | ID of the employee's manager (nullable)  |
 
-Input: 
-Employee table:
-+-----+-------+------------+-----------+
+---
+
+## 🧪 Example Input
+
+### Employee
+
 | id  | name  | department | managerId |
-+-----+-------+------------+-----------+
+|-----|-------|------------|-----------|
 | 101 | John  | A          | null      |
 | 102 | Dan   | A          | 101       |
 | 103 | James | A          | 101       |
 | 104 | Amy   | A          | 101       |
 | 105 | Anne  | A          | 101       |
 | 106 | Ron   | B          | 101       |
-+-----+-------+------------+-----------+
-Output: 
-+------+
+
+---
+
+## ✅ Expected Output
+
 | name |
-+------+
+|------|
 | John |
-+------+
+
+---
+
+## 💡 SQL Query
+
+```sql
+SELECT name
+FROM Employee
+WHERE id IN (
+    SELECT managerId
+    FROM Employee
+    WHERE managerId IS NOT NULL
+    GROUP BY managerId
+    HAVING COUNT(*) >= 5
+);
